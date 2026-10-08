@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CTS 234 Project</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            text-align: center;
+            padding-top: 100px;
+            transition: background-color 0.3s;
+        }
+        button {
+            font-size: 20px;
+            padding: 15px 30px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>CTS 234 — Docker on Windows Server</h1>
+    <p>Click the button. It calls the backend API, which picks a color and sends it back.</p>
+    <button onclick="changeColor()">Click me</button>
+    <p id="status"></p>
+
+    <script>
+        async function changeColor() {
+            // This is the API call - frontend talking to backend
+            const response = await fetch('/click');
+            const data = await response.json();
+
+            document.body.style.backgroundColor = data.color;
+            document.getElementById('status').innerText =
+                'Server said: ' + data.color + ' (at ' + data.timestamp + ')';
+        }
+    </script>
+</body>
+</html>
